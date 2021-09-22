@@ -1,0 +1,33 @@
+// ==UserScript==
+// @name Yandex_Bot_1
+// @namespace http://tampermonkey.net/
+// @Version 0.1
+// @description Yandex_Bot_1
+// @author SavinEgor
+// @match https://yandex.ru/*
+// @match https://ya.ru/*
+// @grant none
+// ==/UserScript==
+
+let keywords = ['как звучит флейта', 'как звучит кларнет'],
+keyword = keywords[getRandom(0, keywords.length)],
+links = document.links,
+btnK = document.querySelector('.button_theme_search');
+document.getElementsByName('text')[0].value = keyword;
+
+if(btnK !== undefined && btnK !== null) {
+btnK.click();
+}else {
+for(let i = 0; i < links.length; i ++) {
+if (links[i].href.includes('xn----7sbab5aqcbiddtdj1e1g.xn--p1ai')){
+let link = links[i];
+link.click();
+console.log('Нашел строку' + links[i]);
+break;
+}
+}
+}
+
+function getRandom(min, max){
+return Math.floor(Math.random()*(max-min)+min);
+}
